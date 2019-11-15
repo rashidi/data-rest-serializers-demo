@@ -71,6 +71,6 @@ class BookRestRepositoryTests {
                 get("/books/{id}", id)
         )
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.author", is("Rudyard Kipling")));
+                .andExpect(jsonPath("$.content.author", is("Rudyard Kipling")));
     }
 }
