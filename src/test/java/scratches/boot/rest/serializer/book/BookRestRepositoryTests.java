@@ -1,6 +1,7 @@
 package scratches.boot.rest.serializer.book;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureTestEntityManager;
@@ -25,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 @Transactional
 @AutoConfigureTestEntityManager
-@AutoConfigureMockMvc(printOnlyOnFailure = false)
+@AutoConfigureMockMvc
 @SpringBootTest(webEnvironment = DEFINED_PORT)
 class BookRestRepositoryTests {
 
@@ -42,6 +43,7 @@ class BookRestRepositoryTests {
     private BookRepository repository;
 
     @Test
+    @DisplayName("Author will automatically be persisted and its ID will be assign to the Book before persisting")
     void deserializeRequest() throws Exception {
         var book = new Book("Rudyard Kipling", "The Jungle Book", "A1234567D");
 
@@ -56,6 +58,7 @@ class BookRestRepositoryTests {
     }
 
     @Test
+    @DisplayName("Author name will be assigned to Book based on authorId field")
     void serializeResponse() throws Exception {
         var authorId = em.persistAndGetId(new Author("Rudyard Kipling"), Long.class);
         var book = new Book("Rudyard Kipling", "The Jungle Book", "A1234567D");
