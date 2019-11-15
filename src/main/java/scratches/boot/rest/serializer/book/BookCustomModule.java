@@ -22,6 +22,7 @@ public class BookCustomModule extends SimpleModule {
         serializers.addSerializer(Book.class, new BookJsonSerializer(authorRepository));
         deserializers.addDeserializer(Book.class, new BookJsonDeserializer(authorRepository));
 
+        context.addSerializers(serializers);
         context.addDeserializers(deserializers);
     }
 }
