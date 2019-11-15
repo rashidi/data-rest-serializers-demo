@@ -42,7 +42,7 @@ class BookRestRepositoryTests {
     private BookRepository repository;
 
     @Test
-    void serializeRequest() throws Exception {
+    void deserializeRequest() throws Exception {
         var book = new Book("Rudyard Kipling", "The Jungle Book", "A1234567D");
 
         mvc.perform(
@@ -56,7 +56,7 @@ class BookRestRepositoryTests {
     }
 
     @Test
-    void deserializeEntity() throws Exception {
+    void serializeResponse() throws Exception {
         var authorId = em.persistAndGetId(new Author("Rudyard Kipling"), Long.class);
         var book = new Book("Rudyard Kipling", "The Jungle Book", "A1234567D");
 
